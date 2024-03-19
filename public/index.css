@@ -58,3 +58,29 @@ body {
 #error{
   color: #c8102e;
 }
+
+.success-message {
+  margin-top: 15px;
+  height: 40px;
+  background-color: lightgreen;
+  color: green;
+  border-radius: 4px;
+  border: 1px solid green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tratta {
+  border: 1px solid lightgrey;
+}
+
+.querySpaceDiv {
+  width: 70%;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.spaceQuery{
+  margin-bottom: 80px;
+}
