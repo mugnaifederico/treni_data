@@ -1,7 +1,7 @@
 const express = require("express");
 const fs = require("fs");
 const mysql = require("mysql2");
-const conf = require("./conf.js");
+const conf = require("./conf1.js");
 const connection = mysql.createConnection(conf);
 
 const http = require("http");

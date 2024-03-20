@@ -208,14 +208,19 @@ const tbody = document.getElementById("tbody");
 
 const calcOrario = (data) => {
   console.log(data);
-  let splitted = String(data).split(".");
-  if (splitted[0].length == 1) {
-    splitted[0] = "0" + splitted[0];
+  try {
+    let splitted = String(data).split(".");
+    if (splitted[0].length == 1) {
+      splitted[0] = "0" + splitted[0];
+    }
+    if (splitted[1].length == 1) {
+      splitted[1] += "0";
+    }
+    return splitted[0] + ":" + splitted[1];
+  } catch (e) {
+    console.log(e);
+    return String(data);
   }
-  if (splitted[1].length == 1) {
-    splitted[1] += "0";
-  }
-  return splitted[0] + ":" + splitted[1];
 };
 
 const render = (data) => {
@@ -345,9 +350,14 @@ query1.onclick = () => {
     sendQuery1({ stazione: stazionePartenza1, orario: orarioPart1 }).then(
       (result) => {
         let html = "";
-        result.forEach((element) => {
-          html += element.orario_partenza + "<br>";
-        });
+        if (result.length) {
+          result.forEach((element) => {
+            html += element.orario_partenza + "<br>";
+          });
+        } else {
+          html = "Nessun treno corrispondente alla ricerca";
+        }
+
         spaceQuery1.innerHTML = html;
       },
     );
@@ -370,12 +380,17 @@ query2.onclick = () => {
         const template = `
         Origine: %origine, Destinazione: %destinazione, Orario partenza: %orario_partenza <br>
         `;
-        result.forEach((element) => {
-          html += template
-            .replace("%origine", element.origine)
-            .replace("%destinazione", element.destinazione)
-            .replace("%orario_partenza", element.orario_partenza);
-        });
+        if (result.length) {
+          result.forEach((element) => {
+            html += template
+              .replace("%origine", element.origine)
+              .replace("%destinazione", element.destinazione)
+              .replace("%orario_partenza", element.orario_partenza);
+          });
+        } else {
+          html = "Nessun treno corrispondente alla ricerca";
+        }
+
         spaceQuery2.innerHTML = html;
       },
     );
@@ -395,9 +410,13 @@ query3.onclick = () => {
     sendQuery3({ partenza: stazionePartenza3, arrivo: stazioneArrivo3 }).then(
       (result) => {
         let html = "";
-        result.forEach((element) => {
-          html += element.orario_partenza + "<br>";
-        });
+        if (result.length) {
+          result.forEach((element) => {
+            html += element.orario_partenza + "<br>";
+          });
+        } else {
+          html = "Nessun treno corrispondente alla ricerca";
+        }
         spaceQuery3.innerHTML = html;
       },
     );
